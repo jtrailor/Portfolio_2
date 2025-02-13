@@ -5,4 +5,5 @@
 html, body {
   background-color: #bfdbfe;
   scroll-behavior: smooth;
+  scroll-padding-top: 2rem; /* Adjust this to match the header height */
 }
