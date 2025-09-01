@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import profilePhoto from "../images/profile-photo.jpg";
-import sunglasses from "../images/sunnies.png";
+import React, { useState } from 'react'
+import profilePhoto from '../images/profile-photo.jpg'
+import sunglasses from '../images/sunnies.png'
 
 function Intro() {
-  const [showSunglasses, setShowSunglasses] = useState(false);
+  const [showSunglasses, setShowSunglasses] = useState(false)
 
-  const toggleSunglasses = () => setShowSunglasses(!showSunglasses);
+  const toggleSunglasses = () => setShowSunglasses(!showSunglasses)
 
   return (
-<section
+    <section
       id="intro"
       className="min-h-screen p-8 flex flex-col items-center justify-center"
     >
@@ -16,7 +16,10 @@ function Intro() {
       <p className="text-lg mb-6">I'm an aerospace software engineer!</p>
 
       {/* Image container - w/h must be in 4 step increments */}
-      <div className="relative w-72 h-72 cursor-pointer" onClick={toggleSunglasses}>
+      <div
+        className="relative w-72 h-72 cursor-pointer"
+        onClick={toggleSunglasses}
+      >
         <img
           src={profilePhoto}
           alt="Jon"
@@ -33,7 +36,7 @@ function Intro() {
         )}
       </div>
     </section>
-  );
+  )
 }
 
-export default Intro;
+export default Intro

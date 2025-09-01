@@ -1,36 +1,36 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 function Experience() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalContent, setModalContent] = useState(null)
 
   const openModal = (content) => {
-    setModalContent(content);
-    setIsModalOpen(true);
-  };
+    setModalContent(content)
+    setIsModalOpen(true)
+  }
 
   const closeModal = () => {
-    setIsModalOpen(false);
-    setModalContent(null);
-  };
+    setIsModalOpen(false)
+    setModalContent(null)
+  }
 
   // Array of experiences
   const experiences = [
     {
-      title: "Frontend Developer",
-      company: "Awesome Corp",
+      title: 'Frontend Developer',
+      company: 'Awesome Corp',
       details:
-        "I developed user interfaces with React and Tailwind, optimizing performance and enhancing the user experience.",
-      color: "bg-blue-500",
+        'I developed user interfaces with React and Tailwind, optimizing performance and enhancing the user experience.',
+      color: 'bg-blue-500',
     },
     {
-      title: "Backend Developer",
-      company: "Tech Solutions",
+      title: 'Backend Developer',
+      company: 'Tech Solutions',
       details:
-        "I developed and maintained APIs using Node.js and Express, integrating with databases like MongoDB and PostgreSQL.",
-      color: "bg-green-500",
-    }
-  ];
+        'I developed and maintained APIs using Node.js and Express, integrating with databases like MongoDB and PostgreSQL.',
+      color: 'bg-green-500',
+    },
+  ]
 
   return (
     <section id="experience" className="min-h-screen p-8">
@@ -69,7 +69,7 @@ function Experience() {
         </div>
       )}
     </section>
-  );
+  )
 }
 
-export default Experience;
+export default Experience

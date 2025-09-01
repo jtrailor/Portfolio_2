@@ -1,6 +1,12 @@
-import React from 'react';
-import { Header, Intro, Experience, Projects, Skills, Contact } from './components';
-
+import React from 'react'
+import {
+  Header,
+  Intro,
+  Experience,
+  Projects,
+  Skills,
+  Contact,
+} from './components'
 
 function App() {
   return (
@@ -14,7 +20,7 @@ function App() {
         <Contact />
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
