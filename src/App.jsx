@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="pt-8">
+      <div>
         <Intro />
         <Experience />
         <Projects />
