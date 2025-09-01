@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 function Experience() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalContent, setModalContent] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState('Professional')
 
   const openModal = (content) => {
     setModalContent(content)
@@ -14,8 +15,7 @@ function Experience() {
     setModalContent(null)
   }
 
-  // Array of experiences
-  const experiences = [
+  const professionalExperiences = [
     {
       title: 'Frontend Developer',
       company: 'Awesome Corp',
@@ -32,13 +32,52 @@ function Experience() {
     },
   ]
 
+  const academicExperiences = [
+    {
+      title: 'Software Engineering Intern',
+      company: 'University Lab',
+      details:
+        'Worked on research projects building web apps and algorithms in a collaborative environment.',
+      color: 'bg-purple-500',
+    },
+    {
+      title: 'CS Research Assistant',
+      company: 'University Dept.',
+      details:
+        'Assisted in teaching and developed educational software tools for students.',
+      color: 'bg-yellow-500',
+    },
+  ]
+
+  const experiences =
+    selectedCategory === 'Professional'
+      ? professionalExperiences
+      : academicExperiences
+
   return (
     <section id="experience" className="min-h-screen p-8">
       <h1 className="text-4xl mb-6">Experience</h1>
-      <p className="mb-8">Click on each card to learn more</p>
+      <p className="mb-6">Tap on each card to learn more!</p>
 
-      {/* Map all experiences to a card */}
-      <div className="grid md:grid-cols-1 lg:grid-cols-2">
+      {/* Category Toggle */}
+      <div className="flex gap-4 mb-8 justify-center">
+        {['Professional', 'Academic'].map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCategory(cat)}
+            className={`w-40 px-6 py-2 rounded-full font-semibold transition-colors duration-300 ${
+              selectedCategory === cat
+                ? 'bg-blue-500 text-white shadow-lg'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* Experience Cards */}
+      <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
         {experiences.map((exp, index) => (
           <div key={index} className="px-10 py-5">
             <div

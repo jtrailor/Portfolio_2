@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import { FaReact, FaNodeJs, FaPython } from 'react-icons/fa' // example icons
+import { FaReact, FaNodeJs, FaPython } from 'react-icons/fa'
+import { TbBrandCpp } from 'react-icons/tb'
+import { SiC } from 'react-icons/si'
+import { LiaMountainSolid } from 'react-icons/lia'
 
 function Skills() {
   const [selectedSkill, setSelectedSkill] = useState(null)
 
-  // Example skills array
+  // Skills array
   const skills = [
     {
       name: 'React',
@@ -21,18 +24,31 @@ function Skills() {
       icon: <FaPython className="text-yellow-500 w-12 h-12" />,
       years: 4,
     },
-    // Add more skills here
+    {
+      name: 'C++',
+      icon: <TbBrandCpp className="text-yellow-500 w-12 h-12" />,
+      years: 4,
+    },
+    {
+      name: 'C',
+      icon: <SiC className="text-yellow-500 w-12 h-12" />,
+      years: 4,
+    },
+    {
+      name: 'Green Hills MULTI & Integrity 178',
+      icon: <LiaMountainSolid className="text-green-500 w-12 h-12" />,
+      years: 4,
+    },
   ]
 
   return (
     <section id="skills" className="min-h-screen p-8">
-      {' '}
-      <h1 className="text-4xl">Skills</h1> <p>Content for Skills</p>
+      <h1 className="text-4xl">Skills</h1>
       {/* Years of experience box */}
-      <div className="mb-8 w-64 h-20 flex items-center justify-center bg-gray-200 rounded-lg shadow-md">
+      <div className="mb-8 w-64 h-20 mx-auto flex items-center justify-center bg-gray-200 rounded-lg shadow-md">
         {selectedSkill ? (
           <p className="text-xl font-semibold">
-            {selectedSkill.name}: {selectedSkill.years} years
+            Years of Experience: {selectedSkill.years}
           </p>
         ) : (
           <p className="text-xl font-semibold text-gray-500">
