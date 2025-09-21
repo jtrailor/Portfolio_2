@@ -2,8 +2,8 @@ import React from 'react'
 
 function Header() {
   return (
-    <header className="fixed top-0 w-full z-50 bg-gray-800 text-white p-4">
-      <nav className="container mx-auto flex justify-between">
+    <header className="fixed top-0 w-full z-50 bg-brand-dark_blue text-white p-4">
+      <nav className="container mx-auto flex justify-between text-xl">
         <a href="#intro" className="hover:underline">
           Jon Trailor
         </a>

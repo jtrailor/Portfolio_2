@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { FaReact, FaNodeJs, FaPython } from 'react-icons/fa'
 import { TbBrandCpp } from 'react-icons/tb'
 import { SiC } from 'react-icons/si'
@@ -12,12 +12,12 @@ function Skills() {
     {
       name: 'React',
       icon: <FaReact className="text-blue-500 w-12 h-12" />,
-      years: 3,
+      years: 1,
     },
     {
       name: 'Node.js',
       icon: <FaNodeJs className="text-green-500 w-12 h-12" />,
-      years: 2,
+      years: 1,
     },
     {
       name: 'Python',
@@ -27,35 +27,29 @@ function Skills() {
     {
       name: 'C++',
       icon: <TbBrandCpp className="text-yellow-500 w-12 h-12" />,
-      years: 4,
+      years: 3,
     },
     {
       name: 'C',
       icon: <SiC className="text-yellow-500 w-12 h-12" />,
-      years: 4,
+      years: 2,
     },
     {
       name: 'Green Hills MULTI & Integrity 178',
       icon: <LiaMountainSolid className="text-green-500 w-12 h-12" />,
-      years: 4,
+      years: 1,
     },
   ]
 
   return (
     <section id="skills" className="min-h-screen p-8">
-      <h1 className="text-4xl">Skills</h1>
-      {/* Years of experience box */}
-      <div className="mb-8 w-64 h-20 mx-auto flex items-center justify-center bg-gray-200 rounded-lg shadow-md">
-        {selectedSkill ? (
-          <p className="text-xl font-semibold">
-            Years of Experience: {selectedSkill.years}
-          </p>
-        ) : (
-          <p className="text-xl font-semibold text-gray-500">
-            Tap an icon to see experience
-          </p>
-        )}
-      </div>
+      <h1 className="page-title">Skills</h1>
+      {/* Years of experience text */}
+      <p className="text-xl font-semibold text-center mb-8">
+        {selectedSkill
+          ? `Years of ${selectedSkill.name} Experience: ${selectedSkill.years}`
+          : 'Tap an icon to see years of experience.'}
+      </p>
       {/* Skills grid */}
       <div className="grid grid-cols-3 md:grid-cols-6 gap-8">
         {skills.map((skill) => (

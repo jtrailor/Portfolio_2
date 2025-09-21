@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 function Experience() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -17,35 +17,64 @@ function Experience() {
 
   const professionalExperiences = [
     {
-      title: 'Frontend Developer',
-      company: 'Awesome Corp',
-      details:
-        'I developed user interfaces with React and Tailwind, optimizing performance and enhancing the user experience.',
-      color: 'bg-blue-500',
+      title: 'Senior Software Engineer 2 - Engineering Leadership Program',
+      company: 'General Dynamics Mission Systems',
+      details: [
+        'Expanded into a product owner and technical leadership role on a large defense project, driving application design, code reviews, and derived system requirements.',
+      ],
     },
     {
-      title: 'Backend Developer',
-      company: 'Tech Solutions',
-      details:
-        'I developed and maintained APIs using Node.js and Express, integrating with databases like MongoDB and PostgreSQL.',
-      color: 'bg-green-500',
+      title: 'Senior Software Engineer 1 - Engineering Leadership Program',
+      company: 'General Dynamics Mission Systems',
+      details: [
+        'Selected to join the GDMS Engineering Leadership Program. Completed a concurrent academic project covering requirements finalization, story grooming, system design, and testing, and conducted a CDR for company leadership.',
+      ],
+    },
+    {
+      title: 'Senior Software Engineer 1',
+      company: 'General Dynamics Mission Systems',
+      details: [
+        'Led the successful execution of an IRAD project, showcasing a demo to the USAF. Successfully completed over 100 development tasks for a large, agile, mission-critical defense project, spanning fullstack object-oriented software engineering, DevOps enhancements, and UML/SysML modeling.',
+      ],
+    },
+    {
+      title: 'Teaching Assistant',
+      company: 'Northeastern University',
+      details: [
+        'Taught weekly labs with 30 students implementing concepts from the preceding lecture. Concepts included solving problems with programming features, algorithm analysis, and object-oriented design.',
+      ],
+    },
+    {
+      title: 'Software Engineer Intern',
+      company: 'Kessel Run (USAF AFLCMC/HBB)',
+      details: [
+        'Developed a calculation micro-service with Java and Spring Boot for the USAF.',
+      ],
+    },
+    {
+      title: 'Software Engineer Intern',
+      company: 'The TJX Companies, Inc.',
+      details: [
+        'Automated multiple start and stop procedures for various applications utilizing Ansible and Ansible Tower. Enabled nontechnical users to quickly and safely start and stop their applications and supporting infrastructure.',
+      ],
     },
   ]
 
   const academicExperiences = [
     {
-      title: 'Software Engineering Intern',
-      company: 'University Lab',
-      details:
-        'Worked on research projects building web apps and algorithms in a collaborative environment.',
-      color: 'bg-purple-500',
+      title: "Master's in Computer Science",
+      company: 'Khoury College of CS, Northeastern University',
+      details: [
+        '3.93 GPA',
+        'Relevant Coursework: Object Oriented Design, Data Structures and Algorithms, Graduate Algorithms, Network Fundamentals, Database Design, Computer Systems, Scalable Distributed Computing Systems',
+      ],
     },
     {
       title: 'CS Research Assistant',
       company: 'University Dept.',
-      details:
+      details: [
         'Assisted in teaching and developed educational software tools for students.',
-      color: 'bg-yellow-500',
+      ],
     },
   ]
 
@@ -56,8 +85,8 @@ function Experience() {
 
   return (
     <section id="experience" className="min-h-screen p-8">
-      <h1 className="text-4xl mb-6">Experience</h1>
-      <p className="mb-6">Tap on each card to learn more!</p>
+      <h1 className="page-title">Experience</h1>
+      <p className="page-sub-title">Tap on each card to learn more!</p>
 
       {/* Category Toggle */}
       <div className="flex gap-4 mb-8 justify-center">
@@ -65,10 +94,10 @@ function Experience() {
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`w-40 px-6 py-2 rounded-full font-semibold transition-colors duration-300 ${
+            className={`w-60 px-6 py-2 rounded-full font-semibold transition-colors duration-300 text-2xl ${
               selectedCategory === cat
-                ? 'bg-blue-500 text-white shadow-lg'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'bg-brand-orange text-white shadow-lg'
+                : 'bg-brand-cream text-black hover:bg-gray-300'
             }`}
           >
             {cat}
@@ -82,7 +111,7 @@ function Experience() {
           <div key={index} className="px-10 py-5">
             <div
               onClick={() => openModal(exp)}
-              className={`cursor-pointer p-6 ${exp.color} text-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105`}
+              className={`cursor-pointer p-6 bg-brand-tan rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105`}
             >
               <h3 className="text-2xl font-semibold">{exp.title}</h3>
               <p>{exp.company}</p>
@@ -97,10 +126,14 @@ function Experience() {
           <div className="bg-white rounded-lg w-96 p-6 space-y-4">
             <h3 className="text-2xl font-semibold">{modalContent?.title}</h3>
             <p className="text-gray-700">{modalContent?.company}</p>
-            <p>{modalContent?.details}</p>
+            <p>
+              {modalContent?.details.map((line, idx) => (
+                <p key={idx}>{line}</p>
+              ))}
+            </p>
             <button
               onClick={closeModal}
-              className="mt-4 bg-red-500 text-white p-2 rounded-md"
+              className="mt-4 bg-brand-orange text-white p-2 rounded-md"
             >
               Close
             </button>

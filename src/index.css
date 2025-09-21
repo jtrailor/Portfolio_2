@@ -2,8 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .page-title {
+    @apply font-bold text-4xl my-6;
+  }
+  .page-sub-title {
+    @apply text-2xl mb-6;
+  }
+}
+
 html, body {
-  background-color: #bfdbfe;
+  background-color: #A5C9CA;
   scroll-behavior: smooth;
   scroll-padding-top: 2rem; /* Adjust this to match the header height */
 }

@@ -13,7 +13,7 @@ function Intro() {
       className="min-h-screen p-8 flex flex-col items-center justify-center"
     >
       <h1 className="text-4xl font-bold mb-4">Hi I'm Jon</h1>
-      <p className="text-lg mb-6">I'm an aerospace software engineer!</p>
+      <p className="text-2xl mb-6">I'm an aerospace software engineer!</p>
 
       {/* Image container - w/h must be in 4 step increments */}
       <div
