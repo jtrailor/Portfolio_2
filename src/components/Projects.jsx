@@ -10,21 +10,21 @@ import project3Img from '../images/mastermind.jpg'
 function Projects() {
   const projects = [
     {
-      title: 'Portfolio Website',
-      description: 'A personal portfolio built with React and Tailwind.',
-      url: 'https://gitlab.com/username/portfolio',
+      title: 'Dijkstra\'s Algorithm',
+      description: 'Program implementation of Dijkstra\'s algorithm in C.',
+      url: 'https://github.com/jtrailor/Dijkstras-Implementation',
       image: project1Img,
     },
     {
-      title: 'Task Manager',
-      description: 'Full-stack task manager app with Node.js and MongoDB.',
-      url: 'https://gitlab.com/username/task-manager',
+      title: 'MyBar GUI',
+      description: 'A Java based tool that can generate drink combinations.',
+      url: 'https://github.com/jtrailor/MyBar-GUI',
       image: project2Img,
     },
     {
-      title: 'E-commerce Store',
-      description: 'Online store with product catalog and checkout.',
-      url: 'https://gitlab.com/username/e-commerce',
+      title: 'Mastermind Game',
+      description: 'Mastermind game implementation using Python\'s turtle framework.',
+      url: 'https://github.com/jtrailor/Mastermind-Game',
       image: project3Img,
     },
   ]
@@ -33,8 +33,7 @@ function Projects() {
     <section id="projects" className="min-h-screen p-8">
       <h1 className="page-title">Projects</h1>
       <p className="page-sub-title">
-        Use the arrows to browse my projects, then click the button to open them
-        on GitLab.
+        Use the arrows to browse my projects, then click the button to open them on GitLab.
       </p>
 
       <Swiper
