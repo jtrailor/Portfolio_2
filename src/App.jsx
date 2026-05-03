@@ -5,6 +5,7 @@ import {
   Projects,
   Skills,
   Contact,
+  Footer,
 } from './components'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         </div>
         <Contact />
       </div>
+      <Footer />
     </div>
   )
 }

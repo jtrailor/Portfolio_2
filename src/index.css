@@ -4,11 +4,24 @@
 
 @layer components {
   .page-title {
-    @apply font-bold text-4xl my-6;
+    @apply font-bold text-4xl mt-6 mb-10;
+    display: inline-block;
+    padding-bottom: 10px;
+    border-bottom: 4px solid #C84B31;
+    border-radius: 1px;
   }
   .page-sub-title {
     @apply text-2xl mb-6;
   }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 0.8s step-end infinite;
 }
 
 .fade-in-up {

@@ -2,9 +2,13 @@ import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 import { useInView } from '../hooks/useInView'
 
+const inputClass =
+  'w-full p-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-dark_blue focus:border-transparent transition-all duration-200'
+
 function Contact() {
   const form = useRef()
   const [toast, setToast] = useState(null)
+  const [isSending, setIsSending] = useState(false)
   const [ref, inView] = useInView()
 
   const showToast = (message, type) => {
@@ -14,6 +18,7 @@ function Contact() {
 
   const sendEmail = (e) => {
     e.preventDefault()
+    setIsSending(true)
 
     emailjs
       .sendForm(
@@ -32,6 +37,7 @@ function Contact() {
           showToast('Oops, something went wrong.', 'error')
         },
       )
+      .finally(() => setIsSending(false))
   }
 
   return (
@@ -43,38 +49,38 @@ function Contact() {
         ref={ref}
         className={`w-full max-w-md fade-in-up ${inView ? 'visible' : ''}`}
       >
-        <h1 className="text-4xl mb-6 font-bold text-center">Contact Me</h1>
-        <form
-          ref={form}
-          onSubmit={sendEmail}
-          className="flex flex-col gap-4"
-        >
+        <div className="text-center">
+          <h1 className="page-title">Contact Me</h1>
+        </div>
+
+        <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-4 mt-2">
           <input
             type="text"
             name="from_name"
             placeholder="Your Name"
-            className="p-3 rounded border border-gray-300"
+            className={inputClass}
             required
           />
           <input
             type="email"
             name="from_email"
             placeholder="Your Email"
-            className="p-3 rounded border border-gray-300"
+            className={inputClass}
             required
           />
           <textarea
             name="message"
             rows="5"
             placeholder="Your Message"
-            className="p-3 rounded border border-gray-300"
+            className={inputClass}
             required
-          ></textarea>
+          />
           <button
             type="submit"
-            className="bg-brand-dark_blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-orange transition-colors duration-300"
+            disabled={isSending}
+            className="bg-brand-dark_blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-orange transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Send
+            {isSending ? 'Sending…' : 'Send'}
           </button>
         </form>
       </div>

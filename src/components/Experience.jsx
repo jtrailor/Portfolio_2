@@ -21,41 +21,49 @@ function Experience() {
     {
       title: 'Sr. Software Engineer 2 - Engineering Leadership Program',
       company: 'General Dynamics Mission Systems',
+      dates: 'May 2025 – Present',
       details: "Rotated onto an underwater robotics project applying C++ and distributed systems to integrate an INS and Doppler Velocity Log. Served as Scrum Master, increasing team velocity by 15%. Selected as architect for GDMS's internal AI assistant validation strategy, acting as liaison between IT and line-of-business users.",
     },
     {
       title: 'Sr. Software Engineer - Engineering Leadership Program',
       company: 'General Dynamics Mission Systems',
+      dates: 'Aug 2024 – Apr 2025',
       details: "Expanded into a product owner role driving application design and code reviews. Selected for the GDMS Engineering Leadership Program, completing an academic project that culminated in a CDR for company leadership and the delivery of a MVC Python/PyQt6 torpedo defense GUI.",
     },
     {
       title: 'Senior Software Engineer',
       company: 'General Dynamics Mission Systems',
+      dates: 'May 2023 – Aug 2024',
       details: 'Led an IRAD project end-to-end, delivering a demo to the USAF using Ada, gRPC, and React. Completed 100+ development tasks for a mission-critical agile defense project spanning full-stack OO development, DevOps enhancements, and UML/SysML modeling.',
     },
     {
       title: 'Teaching Assistant',
       company: 'Northeastern University',
+      dates: 'Sep 2022 – Dec 2022',
       details: 'Taught weekly labs to 30 students covering programming, algorithm analysis, and OO design. Developed custom tutoring materials to improve student comprehension and deepen their curiosity in computer science.',
     },
     {
       title: 'Software Engineer Intern',
       company: 'Kessel Run (USAF AFLCMC/HBB)',
+      dates: 'Jun 2022 – Sep 2022',
       details: 'Built a Java/Spring Boot calculation micro-service for the USAF and supported its first client integration via API. Optimized a GitLab CI/CD pipeline using directed acyclic graphs, reducing runtime by 50%.',
     },
     {
       title: 'Software Engineer Intern',
       company: 'The TJX Companies, Inc.',
+      dates: 'Jan 2022 – Jun 2022',
       details: "Automated application start/stop procedures with Ansible and Ansible Tower, enabling non-technical users to safely manage their infrastructure. Assisted in developing Packer and Terraform files for automated image creation and provisioning across TJX's infrastructure.",
     },
     {
       title: 'Program Management Analyst – Military Programs',
       company: 'Tsunami Tsolutions',
+      dates: 'Mar 2020 – Jan 2021',
       details: 'Managed deliverables across multiple aerospace projects for Raytheon Technologies customers, including an ERP implementation and technical systems support. Coordinated cross-functional teams across siloed divisions to meet budgetary and quality requirements.',
     },
     {
       title: 'Analyst – Finance and Operations',
       company: 'Tsunami Tsolutions',
+      dates: 'Jun 2018 – Feb 2020',
       details: 'Built a reporting system to communicate project progress and expenditures to internal leadership and clients. Managed quoting for 100+ projects, working with teams and customers to formalize requirements and establish labor estimates.',
     },
   ]
@@ -64,11 +72,13 @@ function Experience() {
     {
       title: "Master's in Computer Science",
       company: 'Khoury College of CS, Northeastern University',
+      dates: 'Jan 2021 – Dec 2023',
       details: "Graduated with a 3.93 GPA from Northeastern's Khoury College of Computer Science. Coursework included Object Oriented Design, Data Structures and Algorithms, Graduate Algorithms, Network Fundamentals, Database Design, Computer Systems, and Scalable Distributed Computing Systems.",
     },
     {
       title: 'Bachelor of Arts in Economics, Political Science',
       company: 'Providence College',
+      dates: 'Aug 2014 – May 2018',
       details: 'Earned a BA in Economics and Political Science, developing strong analytical, research, and communication skills.',
     },
   ]
@@ -113,7 +123,8 @@ function Experience() {
               className="cursor-pointer p-6 bg-brand-tan rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105"
             >
               <h3 className="text-2xl font-semibold">{exp.title}</h3>
-              <p>{exp.company}</p>
+              <p className="text-gray-700">{exp.company}</p>
+              <p className="text-sm text-gray-600 mt-1">{exp.dates}</p>
             </div>
           </div>
         ))}
@@ -121,14 +132,26 @@ function Experience() {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg w-96 p-6 space-y-4">
-            <h3 className="text-2xl font-semibold">{modalContent?.title}</h3>
-            <p className="text-gray-700">{modalContent?.company}</p>
+        <div
+          className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 p-4"
+          onClick={closeModal}
+        >
+          <div
+            className="bg-white rounded-xl w-full max-w-md p-6 shadow-2xl space-y-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div>
+              <span className="text-sm font-semibold text-brand-orange bg-orange-50 px-3 py-1 rounded-full">
+                {modalContent?.dates}
+              </span>
+              <h3 className="text-xl font-bold mt-3">{modalContent?.title}</h3>
+              <p className="text-brand-dark_blue font-medium mt-1">{modalContent?.company}</p>
+            </div>
+            <hr className="border-gray-200" />
             <p className="text-gray-700 leading-relaxed">{modalContent?.details}</p>
             <button
               onClick={closeModal}
-              className="mt-4 bg-brand-orange text-white p-2 rounded-md"
+              className="w-full bg-brand-orange text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-colors duration-300"
             >
               Close
             </button>
