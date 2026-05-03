@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useInView } from '../hooks/useInView'
 
 function Experience() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalContent, setModalContent] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState('Professional')
+  const [ref, inView] = useInView()
 
   const openModal = (content) => {
     setModalContent(content)
@@ -17,46 +19,44 @@ function Experience() {
 
   const professionalExperiences = [
     {
-      title: 'Senior Software Engineer 2 - Engineering Leadership Program',
+      title: 'Sr. Software Engineer 2 - Engineering Leadership Program',
       company: 'General Dynamics Mission Systems',
-      details: [
-        'Expanded into a product owner and technical leadership role on a large defense project, driving application design, code reviews, and derived system requirements.',
-      ],
+      details: "Rotated onto an underwater robotics project applying C++ and distributed systems to integrate an INS and Doppler Velocity Log. Served as Scrum Master, increasing team velocity by 15%. Selected as architect for GDMS's internal AI assistant validation strategy, acting as liaison between IT and line-of-business users.",
     },
     {
-      title: 'Senior Software Engineer 1 - Engineering Leadership Program',
+      title: 'Sr. Software Engineer - Engineering Leadership Program',
       company: 'General Dynamics Mission Systems',
-      details: [
-        'Selected to join the GDMS Engineering Leadership Program. Completed a concurrent academic project covering requirements finalization, story grooming, system design, and testing, and conducted a CDR for company leadership.',
-      ],
+      details: "Expanded into a product owner role driving application design and code reviews. Selected for the GDMS Engineering Leadership Program, completing an academic project that culminated in a CDR for company leadership and the delivery of a MVC Python/PyQt6 torpedo defense GUI.",
     },
     {
-      title: 'Senior Software Engineer 1',
+      title: 'Senior Software Engineer',
       company: 'General Dynamics Mission Systems',
-      details: [
-        'Led the successful execution of an IRAD project, showcasing a demo to the USAF. Successfully completed over 100 development tasks for a large, agile, mission-critical defense project, spanning fullstack object-oriented software engineering, DevOps enhancements, and UML/SysML modeling.',
-      ],
+      details: 'Led an IRAD project end-to-end, delivering a demo to the USAF using Ada, gRPC, and React. Completed 100+ development tasks for a mission-critical agile defense project spanning full-stack OO development, DevOps enhancements, and UML/SysML modeling.',
     },
     {
       title: 'Teaching Assistant',
       company: 'Northeastern University',
-      details: [
-        'Taught weekly labs with 30 students implementing concepts from the preceding lecture. Concepts included solving problems with programming features, algorithm analysis, and object-oriented design.',
-      ],
+      details: 'Taught weekly labs to 30 students covering programming, algorithm analysis, and OO design. Developed custom tutoring materials to improve student comprehension and deepen their curiosity in computer science.',
     },
     {
       title: 'Software Engineer Intern',
       company: 'Kessel Run (USAF AFLCMC/HBB)',
-      details: [
-        'Developed a calculation micro-service with Java and Spring Boot for the USAF.',
-      ],
+      details: 'Built a Java/Spring Boot calculation micro-service for the USAF and supported its first client integration via API. Optimized a GitLab CI/CD pipeline using directed acyclic graphs, reducing runtime by 50%.',
     },
     {
       title: 'Software Engineer Intern',
       company: 'The TJX Companies, Inc.',
-      details: [
-        'Automated multiple start and stop procedures for various applications utilizing Ansible and Ansible Tower. Enabled nontechnical users to quickly and safely start and stop their applications and supporting infrastructure.',
-      ],
+      details: "Automated application start/stop procedures with Ansible and Ansible Tower, enabling non-technical users to safely manage their infrastructure. Assisted in developing Packer and Terraform files for automated image creation and provisioning across TJX's infrastructure.",
+    },
+    {
+      title: 'Program Management Analyst – Military Programs',
+      company: 'Tsunami Tsolutions',
+      details: 'Managed deliverables across multiple aerospace projects for Raytheon Technologies customers, including an ERP implementation and technical systems support. Coordinated cross-functional teams across siloed divisions to meet budgetary and quality requirements.',
+    },
+    {
+      title: 'Analyst – Finance and Operations',
+      company: 'Tsunami Tsolutions',
+      details: 'Built a reporting system to communicate project progress and expenditures to internal leadership and clients. Managed quoting for 100+ projects, working with teams and customers to formalize requirements and establish labor estimates.',
     },
   ]
 
@@ -64,17 +64,12 @@ function Experience() {
     {
       title: "Master's in Computer Science",
       company: 'Khoury College of CS, Northeastern University',
-      details: [
-        '3.93 GPA',
-        'Relevant Coursework: Object Oriented Design, Data Structures and Algorithms, Graduate Algorithms, Network Fundamentals, Database Design, Computer Systems, Scalable Distributed Computing Systems',
-      ],
+      details: "Graduated with a 3.93 GPA from Northeastern's Khoury College of Computer Science. Coursework included Object Oriented Design, Data Structures and Algorithms, Graduate Algorithms, Network Fundamentals, Database Design, Computer Systems, and Scalable Distributed Computing Systems.",
     },
     {
-      title: 'CS Research Assistant',
-      company: 'University Dept.',
-      details: [
-        'Assisted in teaching and developed educational software tools for students.',
-      ],
+      title: 'Bachelor of Arts in Economics, Political Science',
+      company: 'Providence College',
+      details: 'Earned a BA in Economics and Political Science, developing strong analytical, research, and communication skills.',
     },
   ]
 
@@ -106,12 +101,16 @@ function Experience() {
       </div>
 
       {/* Experience Cards */}
-      <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+      <div ref={ref} className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
         {experiences.map((exp, index) => (
-          <div key={index} className="px-10 py-5">
+          <div
+            key={index}
+            className={`px-10 py-5 fade-in-up ${inView ? 'visible' : ''}`}
+            style={{ transitionDelay: inView ? `${index * 0.07}s` : '0s' }}
+          >
             <div
               onClick={() => openModal(exp)}
-              className={`cursor-pointer p-6 bg-brand-tan rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105`}
+              className="cursor-pointer p-6 bg-brand-tan rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105"
             >
               <h3 className="text-2xl font-semibold">{exp.title}</h3>
               <p>{exp.company}</p>
@@ -126,11 +125,7 @@ function Experience() {
           <div className="bg-white rounded-lg w-96 p-6 space-y-4">
             <h3 className="text-2xl font-semibold">{modalContent?.title}</h3>
             <p className="text-gray-700">{modalContent?.company}</p>
-            <div>
-              {modalContent?.details.map((line, idx) => (
-                <p key={idx}>{line}</p>
-              ))}
-            </div>
+            <p className="text-gray-700 leading-relaxed">{modalContent?.details}</p>
             <button
               onClick={closeModal}
               className="mt-4 bg-brand-orange text-white p-2 rounded-md"

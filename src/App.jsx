@@ -13,9 +13,13 @@ function App() {
       <Header />
       <div>
         <Intro />
-        <Experience />
+        <div className="bg-white/15">
+          <Experience />
+        </div>
         <Projects />
-        <Skills />
+        <div className="bg-white/15">
+          <Skills />
+        </div>
         <Contact />
       </div>
     </div>

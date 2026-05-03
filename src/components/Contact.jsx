@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
+import { useInView } from '../hooks/useInView'
 
 function Contact() {
   const form = useRef()
   const [toast, setToast] = useState(null)
+  const [ref, inView] = useInView()
 
   const showToast = (message, type) => {
     setToast({ message, type })
@@ -37,40 +39,45 @@ function Contact() {
       id="contact"
       className="min-h-screen p-8 flex flex-col items-center justify-center"
     >
-      <h1 className="text-4xl mb-6">Contact Me</h1>
-      <form
-        ref={form}
-        onSubmit={sendEmail}
-        className="flex flex-col gap-4 w-full max-w-md"
+      <div
+        ref={ref}
+        className={`w-full max-w-md fade-in-up ${inView ? 'visible' : ''}`}
       >
-        <input
-          type="text"
-          name="from_name"
-          placeholder="Your Name"
-          className="p-3 rounded border border-gray-300"
-          required
-        />
-        <input
-          type="email"
-          name="from_email"
-          placeholder="Your Email"
-          className="p-3 rounded border border-gray-300"
-          required
-        />
-        <textarea
-          name="message"
-          rows="5"
-          placeholder="Your Message"
-          className="p-3 rounded border border-gray-300"
-          required
-        ></textarea>
-        <button
-          type="submit"
-          className="bg-brand-dark_blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-orange transition-colors duration-300"
+        <h1 className="text-4xl mb-6 font-bold text-center">Contact Me</h1>
+        <form
+          ref={form}
+          onSubmit={sendEmail}
+          className="flex flex-col gap-4"
         >
-          Send
-        </button>
-      </form>
+          <input
+            type="text"
+            name="from_name"
+            placeholder="Your Name"
+            className="p-3 rounded border border-gray-300"
+            required
+          />
+          <input
+            type="email"
+            name="from_email"
+            placeholder="Your Email"
+            className="p-3 rounded border border-gray-300"
+            required
+          />
+          <textarea
+            name="message"
+            rows="5"
+            placeholder="Your Message"
+            className="p-3 rounded border border-gray-300"
+            required
+          ></textarea>
+          <button
+            type="submit"
+            className="bg-brand-dark_blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-orange transition-colors duration-300"
+          >
+            Send
+          </button>
+        </form>
+      </div>
 
       {toast && (
         <div
