@@ -37,11 +37,11 @@
 
 html {
   background-color: #2E4052;
+  scroll-behavior: smooth;
+  scroll-padding-top: 30px;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   background-color: #A5C9CA;
-  scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
 }

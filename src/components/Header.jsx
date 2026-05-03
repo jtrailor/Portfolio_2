@@ -1,10 +1,27 @@
 import { useState } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa'
 
+const HEADER_OFFSET = 30 // matches scroll-padding-top: 6rem
+
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const close = () => setMenuOpen(false)
+
+  const navigateTo = (id) => (e) => {
+    e.preventDefault()
+    close()
+    // Wait for the dropdown to close and re-render before scrolling,
+    // otherwise its height skews the calculated scroll target.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const el = document.getElementById(id)
+        if (!el) return
+        const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET
+        window.scrollTo({ top, behavior: 'smooth' })
+      })
+    })
+  }
 
   return (
     <header className="fixed top-0 w-full z-50 bg-brand-dark_blue text-white">
@@ -43,11 +60,11 @@ function Header() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-brand-dark_blue border-t border-white/20 px-6 pb-6 flex flex-col gap-5 text-xl">
-          <a href="#experience" className="hover:underline" onClick={close}>Experience</a>
-          <a href="#projects" className="hover:underline" onClick={close}>Projects</a>
-          <a href="#skills" className="hover:underline" onClick={close}>Skills</a>
-          <a href="#contact" className="hover:underline" onClick={close}>Contact</a>
+        <div className="md:hidden bg-brand-dark_blue border-t border-white/20 px-6 pt-5 pb-6 flex flex-col gap-5 text-xl">
+          <a href="#experience" className="hover:underline" onClick={navigateTo('experience')}>Experience</a>
+          <a href="#projects" className="hover:underline" onClick={navigateTo('projects')}>Projects</a>
+          <a href="#skills" className="hover:underline" onClick={navigateTo('skills')}>Skills</a>
+          <a href="#contact" className="hover:underline" onClick={navigateTo('contact')}>Contact</a>
           <a
             href="/resume.pdf"
             download
