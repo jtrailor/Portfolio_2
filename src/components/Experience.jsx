@@ -126,11 +126,11 @@ function Experience() {
           <div className="bg-white rounded-lg w-96 p-6 space-y-4">
             <h3 className="text-2xl font-semibold">{modalContent?.title}</h3>
             <p className="text-gray-700">{modalContent?.company}</p>
-            <p>
+            <div>
               {modalContent?.details.map((line, idx) => (
                 <p key={idx}>{line}</p>
               ))}
-            </p>
+            </div>
             <button
               onClick={closeModal}
               className="mt-4 bg-brand-orange text-white p-2 rounded-md"

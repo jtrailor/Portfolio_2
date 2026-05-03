@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { FaLinkedin, FaGithub } from 'react-icons/fa'
 import profilePhoto from '../images/profile-photo.jpg'
 import sunglasses from '../images/sunnies.png'
 
@@ -17,13 +18,13 @@ function Intro() {
 
       {/* Image container - w/h must be in 4 step increments */}
       <div
-        className="relative w-72 h-72 cursor-pointer"
+        className="relative w-72 cursor-pointer"
         onClick={toggleSunglasses}
       >
         <img
           src={profilePhoto}
           alt="Jon"
-          className="rounded-full object-cover"
+          className="w-full rounded-full object-cover"
         />
 
         {/* Sunglasses overlay */}
@@ -34,6 +35,30 @@ function Intro() {
             className="absolute top-[21%] left-[27%] w-1/2 h-auto pointer-events-none"
           />
         )}
+      </div>
+
+      <div className="flex items-center gap-6 mt-6">
+        <a
+          href="https://www.linkedin.com/in/jonathantrailor/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaLinkedin className="w-10 h-10 text-brand-dark_blue hover:text-brand-orange transition-colors duration-300" />
+        </a>
+        <a
+          href="https://github.com/jtrailor"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaGithub className="w-10 h-10 text-brand-dark_blue hover:text-brand-orange transition-colors duration-300" />
+        </a>
+        <a
+          href="/resume.pdf"
+          download
+          className="bg-brand-dark_blue text-white px-6 py-2 rounded-full font-semibold hover:bg-brand-orange transition-colors duration-300"
+        >
+          Download Resume
+        </a>
       </div>
     </section>
   )

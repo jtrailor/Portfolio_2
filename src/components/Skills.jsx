@@ -1,65 +1,102 @@
-import { useState } from 'react'
 import { FaReact, FaNodeJs, FaPython } from 'react-icons/fa'
 import { TbBrandCpp } from 'react-icons/tb'
 import { SiC } from 'react-icons/si'
 import { LiaMountainSolid } from 'react-icons/lia'
 
+const proficiencyStyles = {
+  Expert: 'bg-brand-orange text-white',
+  Advanced: 'bg-brand-dark_blue text-white',
+  Proficient: 'bg-brand-tan text-black border border-yellow-600',
+  Familiar: 'bg-brand-cream text-black border border-gray-300',
+}
+
+const skillGroups = [
+  {
+    category: 'Languages',
+    skills: [
+      {
+        name: 'Python',
+        icon: <FaPython className="text-yellow-500 w-10 h-10" />,
+        years: 4,
+        proficiency: 'Expert',
+      },
+      {
+        name: 'C++',
+        icon: <TbBrandCpp className="text-yellow-500 w-10 h-10" />,
+        years: 3,
+        proficiency: 'Advanced',
+      },
+      {
+        name: 'C',
+        icon: <SiC className="text-yellow-500 w-10 h-10" />,
+        years: 2,
+        proficiency: 'Proficient',
+      },
+    ],
+  },
+  {
+    category: 'Web & Frameworks',
+    skills: [
+      {
+        name: 'React',
+        icon: <FaReact className="text-blue-500 w-10 h-10" />,
+        years: 1,
+        proficiency: 'Familiar',
+      },
+      {
+        name: 'Node.js',
+        icon: <FaNodeJs className="text-green-500 w-10 h-10" />,
+        years: 1,
+        proficiency: 'Familiar',
+      },
+    ],
+  },
+  {
+    category: 'Tools',
+    skills: [
+      {
+        name: 'Green Hills MULTI & Integrity 178',
+        icon: <LiaMountainSolid className="text-green-500 w-10 h-10" />,
+        years: 1,
+        proficiency: 'Familiar',
+      },
+    ],
+  },
+]
+
 function Skills() {
-  const [selectedSkill, setSelectedSkill] = useState(null)
-
-  // Skills array
-  const skills = [
-    {
-      name: 'React',
-      icon: <FaReact className="text-blue-500 w-12 h-12" />,
-      years: 1,
-    },
-    {
-      name: 'Node.js',
-      icon: <FaNodeJs className="text-green-500 w-12 h-12" />,
-      years: 1,
-    },
-    {
-      name: 'Python',
-      icon: <FaPython className="text-yellow-500 w-12 h-12" />,
-      years: 4,
-    },
-    {
-      name: 'C++',
-      icon: <TbBrandCpp className="text-yellow-500 w-12 h-12" />,
-      years: 3,
-    },
-    {
-      name: 'C',
-      icon: <SiC className="text-yellow-500 w-12 h-12" />,
-      years: 2,
-    },
-    {
-      name: 'Green Hills MULTI & Integrity 178',
-      icon: <LiaMountainSolid className="text-green-500 w-12 h-12" />,
-      years: 1,
-    },
-  ]
-
   return (
     <section id="skills" className="min-h-screen p-8">
       <h1 className="page-title">Skills</h1>
-      {/* Years of experience text */}
-      <p className="text-xl font-semibold text-center mb-8">
-        {selectedSkill
-          ? `Years of ${selectedSkill.name} Experience: ${selectedSkill.years}`
-          : 'Tap an icon to see years of experience.'}
-      </p>
-      {/* Skills grid */}
-      <div className="grid grid-cols-3 md:grid-cols-6 gap-8">
-        {skills.map((skill) => (
-          <div
-            key={skill.name}
-            className="flex flex-col items-center cursor-pointer hover:scale-110 transition-transform"
-            onClick={() => setSelectedSkill(skill)}
-          >
-            {skill.icon}
-            <p className="mt-2 text-center">{skill.name}</p>
+      <div className="space-y-10">
+        {skillGroups.map((group) => (
+          <div key={group.category}>
+            <h2 className="text-2xl font-semibold mb-4 text-brand-dark_blue">
+              {group.category}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {group.skills.map((skill) => (
+                <div
+                  key={skill.name}
+                  className="flex items-center gap-4 bg-brand-tan rounded-lg shadow-md p-4"
+                >
+                  {skill.icon}
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-lg leading-tight">
+                      {skill.name}
+                    </p>
+                    <p className="text-sm text-gray-700">
+                      {skill.years} {skill.years === 1 ? 'year' : 'years'}
+                    </p>
+                  </div>
+                  <span
+                    className={`shrink-0 text-sm font-semibold px-3 py-1 rounded-full ${proficiencyStyles[skill.proficiency]}`}
+                  >
+                    {skill.proficiency}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>

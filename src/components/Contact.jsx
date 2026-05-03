@@ -1,29 +1,33 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 
 function Contact() {
   const form = useRef()
-  const [success, setSuccess] = useState('')
+  const [toast, setToast] = useState(null)
+
+  const showToast = (message, type) => {
+    setToast({ message, type })
+    setTimeout(() => setToast(null), 4000)
+  }
 
   const sendEmail = (e) => {
     e.preventDefault()
 
     emailjs
       .sendForm(
-        'service_nzhvh3z',
-        'template_3em3p6f',
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
         form.current,
-        '_BBX2rrQzH78ECYHH',
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
       )
       .then(
-        (result) => {
-          console.log(result.text)
-          setSuccess('Message sent successfully!')
+        () => {
+          showToast('Message sent successfully!', 'success')
           form.current.reset()
         },
         (error) => {
-          console.log(error.text)
-          setSuccess('Oops, something went wrong.')
+          console.error('EmailJS error:', error)
+          showToast('Oops, something went wrong.', 'error')
         },
       )
   }
@@ -62,12 +66,21 @@ function Contact() {
         ></textarea>
         <button
           type="submit"
-          className="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
+          className="bg-brand-dark_blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-orange transition-colors duration-300"
         >
           Send
         </button>
       </form>
-      {success && <p className="mt-4 text-green-500">{success}</p>}
+
+      {toast && (
+        <div
+          className={`fixed bottom-6 right-6 px-6 py-4 rounded-lg shadow-lg text-white font-semibold transition-opacity duration-300 ${
+            toast.type === 'success' ? 'bg-brand-dark_blue' : 'bg-brand-orange'
+          }`}
+        >
+          {toast.message}
+        </div>
+      )}
     </section>
   )
 }
