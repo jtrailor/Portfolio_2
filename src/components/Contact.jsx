@@ -87,7 +87,7 @@ function Contact() {
 
       {toast && (
         <div
-          className={`fixed bottom-6 right-6 px-6 py-4 rounded-lg shadow-lg text-white font-semibold transition-opacity duration-300 ${
+          className={`fixed bottom-3 right-3 md:bottom-6 md:right-6 px-4 md:px-6 py-3 md:py-4 rounded-lg shadow-lg text-white font-semibold transition-opacity duration-300 ${
             toast.type === 'success' ? 'bg-brand-dark_blue' : 'bg-brand-orange'
           }`}
         >

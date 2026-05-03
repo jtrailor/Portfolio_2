@@ -53,18 +53,18 @@ function Intro() {
       id="intro"
       className="min-h-screen px-8 py-20 flex items-center justify-center"
     >
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
 
         {/* Left — text content */}
         <div className="flex-1 min-w-0 flex flex-col items-center md:items-start text-center md:text-left">
-          <h1 className="text-5xl font-bold mb-4">Hi, I'm Jon.</h1>
+          <h1 className="text-3xl sm:text-5xl font-bold mb-4">Hi, I'm Jon.</h1>
 
-          <p className="text-2xl mb-6 h-8">
+          <p className="text-lg sm:text-2xl mb-6 min-h-[2rem]">
             {typedText}
             <span className="cursor-blink ml-0.5">|</span>
           </p>
 
-          <p className="text-lg text-gray-800 leading-relaxed mb-8 max-w-lg">
+          <p className="text-base md:text-lg text-gray-800 leading-relaxed mb-8 max-w-lg">
             Senior software engineer at General Dynamics Mission Systems, where I build
             reliable systems for aerospace and defense. I work across the full stack —
             from low-level C++ for underwater robotics to leading engineering teams and
@@ -98,7 +98,7 @@ function Intro() {
 
         {/* Right — photo */}
         <div
-          className="relative w-72 shrink-0 mx-auto cursor-pointer"
+          className="relative w-52 sm:w-72 shrink-0 mx-auto cursor-pointer"
           onClick={() => setShowSunglasses(!showSunglasses)}
         >
           <img

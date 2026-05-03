@@ -14,7 +14,7 @@ function Header() {
         </a>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-4 lg:gap-8">
           <a href="#experience" className="hover:underline">Experience</a>
           <a href="#projects" className="hover:underline">Projects</a>
           <a href="#skills" className="hover:underline">Skills</a>

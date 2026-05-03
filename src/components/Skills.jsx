@@ -54,7 +54,7 @@ function Skills() {
   const [ref, inView] = useInView()
 
   return (
-    <section id="skills" className="min-h-screen p-8">
+    <section id="skills" className="min-h-screen px-4 py-8 md:p-8">
       <h1 className="page-title">Skills</h1>
       <div ref={ref} className="space-y-10">
         {skillGroups.map((group) => (

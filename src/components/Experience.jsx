@@ -94,12 +94,12 @@ function Experience() {
       <p className="page-sub-title">Tap on each card to learn more!</p>
 
       {/* Category Toggle */}
-      <div className="flex gap-4 mb-8 justify-center">
+      <div className="flex gap-3 mb-8 justify-center">
         {['Professional', 'Academic'].map((cat) => (
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`w-60 px-6 py-2 rounded-full font-semibold transition-colors duration-300 text-2xl ${
+            className={`flex-1 md:flex-none md:w-60 px-4 md:px-6 py-2 rounded-full font-semibold transition-colors duration-300 text-lg md:text-2xl ${
               selectedCategory === cat
                 ? 'bg-brand-orange text-white shadow-lg'
                 : 'bg-brand-cream text-black hover:bg-gray-300'
@@ -115,7 +115,7 @@ function Experience() {
         {experiences.map((exp, index) => (
           <div
             key={index}
-            className={`px-10 py-5 fade-in-up ${inView ? 'visible' : ''}`}
+            className={`px-2 sm:px-6 md:px-10 py-3 md:py-5 fade-in-up ${inView ? 'visible' : ''}`}
             style={{ transitionDelay: inView ? `${index * 0.07}s` : '0s' }}
           >
             <div

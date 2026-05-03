@@ -4,14 +4,14 @@
 
 @layer components {
   .page-title {
-    @apply font-bold text-4xl mt-6 mb-10;
+    @apply font-bold text-2xl sm:text-4xl mt-6 mb-8 sm:mb-10;
     display: inline-block;
     padding-bottom: 10px;
     border-bottom: 4px solid #C84B31;
     border-radius: 1px;
   }
   .page-sub-title {
-    @apply text-2xl mb-6;
+    @apply text-lg sm:text-2xl mb-6;
   }
 }
 
@@ -35,7 +35,11 @@
   transform: translateY(0);
 }
 
-html, body {
+html {
+  background-color: #2E4052;
+}
+
+body {
   font-family: 'Inter', sans-serif;
   background-color: #A5C9CA;
   scroll-behavior: smooth;
