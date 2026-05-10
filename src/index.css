@@ -41,7 +41,15 @@ html {
   scroll-padding-top: 30px;
 }
 
+html.dark {
+  background-color: #111827;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background-color: #A5C9CA;
+}
+
+html.dark body {
+  background-color: #111827;
 }

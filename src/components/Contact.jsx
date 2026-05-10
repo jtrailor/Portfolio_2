@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser'
 import { useInView } from '../hooks/useInView'
 
 const inputClass =
-  'w-full p-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-dark_blue focus:border-transparent transition-all duration-200'
+  'w-full p-3 rounded-lg border border-gray-300 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-dark_blue dark:focus:ring-gray-400 focus:border-transparent transition-all duration-200'
 
 function Contact() {
   const form = useRef()

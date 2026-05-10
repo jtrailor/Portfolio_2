@@ -46,6 +46,7 @@ function useTypewriter(phrases) {
 
 function Intro() {
   const [showSunglasses, setShowSunglasses] = useState(false)
+  const [photoLoaded, setPhotoLoaded] = useState(false)
   const typedText = useTypewriter(phrases)
 
   return (
@@ -64,7 +65,7 @@ function Intro() {
             <span className="cursor-blink ml-0.5">|</span>
           </p>
 
-          <p className="text-base md:text-lg text-gray-800 leading-relaxed mb-8 max-w-lg">
+          <p className="text-base md:text-lg text-gray-800 dark:text-gray-300 leading-relaxed mb-8 max-w-lg">
             Senior software engineer at General Dynamics Mission Systems, where I build
             reliable systems for aerospace and defense. I work across the full stack —
             from low-level C++ for underwater robotics to leading engineering teams and
@@ -101,10 +102,16 @@ function Intro() {
           className="relative w-52 sm:w-72 shrink-0 mx-auto cursor-pointer"
           onClick={() => setShowSunglasses(!showSunglasses)}
         >
+          {!photoLoaded && (
+            <div className="w-full aspect-square rounded-full bg-brand-dark_blue/20 animate-pulse" />
+          )}
           <img
             src={profilePhoto}
             alt="Jon"
-            className="w-full rounded-full object-cover"
+            onLoad={() => setPhotoLoaded(true)}
+            className={`w-full rounded-full object-cover transition-opacity duration-700 ${
+              photoLoaded ? 'opacity-100' : 'opacity-0 absolute inset-0'
+            }`}
           />
           {showSunglasses && (
             <img

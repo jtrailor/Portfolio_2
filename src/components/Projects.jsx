@@ -49,17 +49,18 @@ function Projects() {
         >
           {projects.map((project, index) => (
             <SwiperSlide key={index}>
-              <div className="max-w-md mx-auto flex flex-col items-center p-6 rounded-lg shadow-lg bg-brand-tan">
+              <div className="max-w-md mx-auto flex flex-col items-center p-6 rounded-lg shadow-lg bg-brand-tan dark:bg-gray-700">
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
                   className="w-full max-h-96 object-contain rounded-md cursor-pointer transform transition-transform"
                 />
                 <h3 className="text-2xl font-semibold mt-4">{project.title}</h3>
                 <p className="mt-2">{project.description}</p>
                 <button
                   onClick={() => window.open(project.url, '_blank')}
-                  className="mt-4 bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-200"
+                  className="mt-4 bg-white dark:bg-gray-600 text-black dark:text-gray-100 px-4 py-2 rounded-md font-semibold hover:bg-gray-200 dark:hover:bg-gray-500"
                 >
                   View on GitHub
                 </button>

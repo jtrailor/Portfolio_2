@@ -2,7 +2,7 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa'
 
 function Footer() {
   return (
-    <footer className="bg-brand-dark_blue text-white py-8 px-6">
+    <footer className="bg-brand-dark_blue dark:bg-gray-900 text-white py-8 px-6">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="text-sm text-gray-300">
           © {new Date().getFullYear()} Jon Trailor. All rights reserved.

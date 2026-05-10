@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useInView } from '../hooks/useInView'
+import TiltCard from './TiltCard'
 
 function Experience() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -102,7 +103,7 @@ function Experience() {
             className={`flex-1 md:flex-none md:w-60 px-4 md:px-6 py-2 rounded-full font-semibold transition-colors duration-300 text-lg md:text-2xl ${
               selectedCategory === cat
                 ? 'bg-brand-orange text-white shadow-lg'
-                : 'bg-brand-cream text-black hover:bg-gray-300'
+                : 'bg-brand-cream text-black hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600'
             }`}
           >
             {cat}
@@ -118,14 +119,14 @@ function Experience() {
             className={`px-2 sm:px-6 md:px-10 py-3 md:py-5 fade-in-up ${inView ? 'visible' : ''}`}
             style={{ transitionDelay: inView ? `${index * 0.07}s` : '0s' }}
           >
-            <div
+            <TiltCard
               onClick={() => openModal(exp)}
-              className="cursor-pointer p-6 bg-brand-tan rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105"
+              className="cursor-pointer p-6 bg-brand-tan dark:bg-gray-700 rounded-lg shadow-lg hover:shadow-2xl"
             >
               <h3 className="text-2xl font-semibold">{exp.title}</h3>
-              <p className="text-gray-700">{exp.company}</p>
-              <p className="text-sm text-gray-600 mt-1">{exp.dates}</p>
-            </div>
+              <p className="text-gray-700 dark:text-gray-300">{exp.company}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{exp.dates}</p>
+            </TiltCard>
           </div>
         ))}
       </div>
@@ -137,18 +138,18 @@ function Experience() {
           onClick={closeModal}
         >
           <div
-            className="bg-white rounded-xl w-full max-w-md p-6 shadow-2xl space-y-4"
+            className="bg-white dark:bg-gray-800 rounded-xl w-full max-w-md p-6 shadow-2xl space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div>
-              <span className="text-sm font-semibold text-brand-orange bg-orange-50 px-3 py-1 rounded-full">
+              <span className="text-sm font-semibold text-brand-orange bg-orange-50 dark:bg-orange-900/30 px-3 py-1 rounded-full">
                 {modalContent?.dates}
               </span>
               <h3 className="text-xl font-bold mt-3">{modalContent?.title}</h3>
-              <p className="text-brand-dark_blue font-medium mt-1">{modalContent?.company}</p>
+              <p className="text-brand-dark_blue dark:text-brand-light_blue font-medium mt-1">{modalContent?.company}</p>
             </div>
-            <hr className="border-gray-200" />
-            <p className="text-gray-700 leading-relaxed">{modalContent?.details}</p>
+            <hr className="border-gray-200 dark:border-gray-700" />
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{modalContent?.details}</p>
             <button
               onClick={closeModal}
               className="w-full bg-brand-orange text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-colors duration-300"
