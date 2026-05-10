@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+# Jon Trailor — Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal portfolio for [jontrailor.dev](https://jontrailor.dev), built with React and Tailwind CSS and deployed to GitHub Pages.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Getting Started
 
-### `npm start`
+### Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js ≥ 18
+- npm ≥ 9
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Install dependencies
 
-### `npm test`
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Environment variables
 
-### `npm run build`
+Create a `.env.local` file in the project root with your EmailJS credentials:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+REACT_APP_EMAILJS_SERVICE_ID=your_service_id
+REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
+REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+These values are available in your [EmailJS dashboard](https://dashboard.emailjs.com). The file is gitignored and must never be committed.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Run locally
 
-### `npm run eject`
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Opens [http://localhost:3000](http://localhost:3000) with hot reload.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Format code
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm run format
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Runs Prettier across all `src/**/*.{js,jsx}` files.
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Deploying to GitHub Pages
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The site is hosted at a custom domain via GitHub Pages. The `public/CNAME` file must remain in place — `gh-pages` overwrites the deployment branch on every deploy, so the CNAME lives in `public/` rather than the repo root.
 
-### Code Splitting
+```bash
+npm run deploy
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This runs `npm run build` automatically via the `predeploy` hook, then pushes the `build/` output to the `gh-pages` branch.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Tech Stack
 
-### Making a Progressive Web App
+| Category | Technology |
+|---|---|
+| Framework | React 18 (Create React App) |
+| Styling | Tailwind CSS v3 |
+| Contact form | EmailJS (`@emailjs/browser`) |
+| Carousel | Swiper v11 |
+| Icons | React Icons v5 |
+| Deployment | GitHub Pages (`gh-pages`) |
+| Formatting | Prettier |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Dark mode
+Persisted theme toggle in the navigation bar. On first visit the theme defaults to the OS preference (`prefers-color-scheme`); subsequent visits restore the explicit user choice from `localStorage`. Implemented via React Context with Tailwind's `class`-based dark mode strategy.
 
-### Deployment
+### Active section highlighting
+Navigation links highlight in real time as the user scrolls. A passive scroll listener checks which section's top edge is within the upper 40% of the viewport, keeping the correct link highlighted at any scroll speed. Uses a scroll-event approach rather than `IntersectionObserver` at mount so it works correctly with lazily loaded sections.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 3D card tilt
+Experience and Skills cards respond to mouse position with a `perspective(800px) rotateX/Y` transform. CSS transitions are disabled during cursor tracking for instant response and re-enabled on mouse leave for a smooth snap-back.
 
-### `npm run build` fails to minify
+### Typewriter animation
+The hero tagline cycles through four phrases using a custom `useTypewriter` hook — typing at 65 ms/character, pausing 2 s at completion, then deleting at 30 ms/character before advancing to the next phrase. No external dependencies.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Scroll-triggered animations
+Sections and cards fade up into view as they enter the viewport via a custom `useInView` hook backed by `IntersectionObserver`. The observer disconnects after the first intersection so animations are one-shot and do not re-trigger on scroll-back.
+
+### Code splitting and lazy loading
+All below-fold sections (`Experience`, `Projects`, `Skills`, `Contact`, `Footer`) are loaded with `React.lazy` + `Suspense`, splitting them into separate JS chunks that the browser only downloads when needed. Project images also use native `loading="lazy"`.
+
+### Responsive design
+Fully responsive from 375 px mobile through wide desktop. The navigation collapses to a hamburger menu on small screens. A double `requestAnimationFrame` scroll strategy ensures programmatic section navigation lands at the correct position after the mobile menu closes.
+
+### Contact form
+EmailJS-powered form with client-side validation, a disabled send button during in-flight requests to prevent double submission, and branded toast notifications for success and error feedback.

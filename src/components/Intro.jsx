@@ -10,6 +10,13 @@ const phrases = [
   "I'm an aerospace software engineer.",
 ]
 
+/**
+ * Cycles through an array of phrases with a typewriter effect — typing each
+ * phrase at 65 ms/char, pausing 2 s when complete, then deleting at 30 ms/char
+ * before advancing to the next phrase.
+ * @param {string[]} phrases - Ordered list of phrases to animate through.
+ * @returns {string} The currently displayed substring.
+ */
 function useTypewriter(phrases) {
   const [display, setDisplay] = useState('')
   const [phraseIndex, setPhraseIndex] = useState(0)
@@ -31,12 +38,13 @@ function useTypewriter(phrases) {
     }
 
     const t = setTimeout(
-      () => setDisplay(
-        isDeleting
-          ? fullPhrase.slice(0, display.length - 1)
-          : fullPhrase.slice(0, display.length + 1)
-      ),
-      isDeleting ? 30 : 65
+      () =>
+        setDisplay(
+          isDeleting
+            ? fullPhrase.slice(0, display.length - 1)
+            : fullPhrase.slice(0, display.length + 1),
+        ),
+      isDeleting ? 30 : 65,
     )
     return () => clearTimeout(t)
   }, [display, isDeleting, phraseIndex, phrases])
@@ -44,6 +52,10 @@ function useTypewriter(phrases) {
   return display
 }
 
+/**
+ * Hero section displaying a greeting, animated typewriter tagline, bio, social
+ * links, and a profile photo. Clicking the photo toggles a sunglasses overlay.
+ */
 function Intro() {
   const [showSunglasses, setShowSunglasses] = useState(false)
   const [photoLoaded, setPhotoLoaded] = useState(false)

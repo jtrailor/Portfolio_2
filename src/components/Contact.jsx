@@ -5,17 +5,31 @@ import { useInView } from '../hooks/useInView'
 const inputClass =
   'w-full p-3 rounded-lg border border-gray-300 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-dark_blue dark:focus:ring-gray-400 focus:border-transparent transition-all duration-200'
 
+/**
+ * Contact section with an EmailJS-powered form and toast feedback.
+ * Disables the submit button while a send is in flight to prevent double submission.
+ */
 function Contact() {
   const form = useRef()
   const [toast, setToast] = useState(null)
   const [isSending, setIsSending] = useState(false)
   const [ref, inView] = useInView()
 
+  /**
+   * Displays a temporary toast notification that auto-dismisses after 4 seconds.
+   * @param {string} message - Text to display in the toast.
+   * @param {'success'|'error'} type - Controls the toast background color.
+   */
   const showToast = (message, type) => {
     setToast({ message, type })
     setTimeout(() => setToast(null), 4000)
   }
 
+  /**
+   * Submits the form via EmailJS, resets the fields on success, and shows a
+   * toast notification for both the success and error cases.
+   * @param {React.FormEvent} e - The form submit event.
+   */
   const sendEmail = (e) => {
     e.preventDefault()
     setIsSending(true)

@@ -1,5 +1,9 @@
 import { FaLinkedin, FaGithub } from 'react-icons/fa'
 
+/**
+ * Site footer with LinkedIn, GitHub, and resume download links alongside a
+ * dynamic copyright year.
+ */
 function Footer() {
   return (
     <footer className="bg-brand-dark_blue dark:bg-gray-900 text-white py-8 px-6">

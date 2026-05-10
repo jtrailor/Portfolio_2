@@ -8,29 +8,34 @@ import project1Img from '../images/dijkstras.jpg'
 import project2Img from '../images/mybar.jpg'
 import project3Img from '../images/mastermind.jpg'
 
+const projects = [
+  {
+    title: "Dijkstra's Algorithm",
+    description: "Program implementation of Dijkstra's algorithm in C.",
+    url: 'https://github.com/jtrailor/Dijkstras-Implementation',
+    image: project1Img,
+  },
+  {
+    title: 'MyBar GUI',
+    description: 'A Java based tool that can generate drink combinations.',
+    url: 'https://github.com/jtrailor/MyBar-GUI',
+    image: project2Img,
+  },
+  {
+    title: 'Mastermind Game',
+    description: "Mastermind game implementation using Python's turtle framework.",
+    url: 'https://github.com/jtrailor/Mastermind-Game',
+    image: project3Img,
+  },
+]
+
+/**
+ * Section displaying personal projects in a looping Swiper carousel.
+ * Each slide shows a project image, title, description, and a link to GitHub.
+ * Images use native lazy loading since they are well below the fold.
+ */
 function Projects() {
   const [ref, inView] = useInView()
-
-  const projects = [
-    {
-      title: "Dijkstra's Algorithm",
-      description: "Program implementation of Dijkstra's algorithm in C.",
-      url: 'https://github.com/jtrailor/Dijkstras-Implementation',
-      image: project1Img,
-    },
-    {
-      title: 'MyBar GUI',
-      description: 'A Java based tool that can generate drink combinations.',
-      url: 'https://github.com/jtrailor/MyBar-GUI',
-      image: project2Img,
-    },
-    {
-      title: 'Mastermind Game',
-      description: "Mastermind game implementation using Python's turtle framework.",
-      url: 'https://github.com/jtrailor/Mastermind-Game',
-      image: project3Img,
-    },
-  ]
 
   return (
     <section id="projects" className="min-h-screen p-8">

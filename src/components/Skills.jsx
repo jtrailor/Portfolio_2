@@ -9,8 +9,10 @@ import TiltCard from './TiltCard'
 const proficiencyStyles = {
   Expert: 'bg-brand-orange text-white',
   Advanced: 'bg-brand-dark_blue text-white dark:bg-gray-600',
-  Proficient: 'bg-brand-tan text-black border border-yellow-600 dark:bg-yellow-900/40 dark:text-yellow-200 dark:border-yellow-700',
-  Familiar: 'bg-brand-cream text-black border border-gray-300 dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500',
+  Proficient:
+    'bg-brand-tan text-black border border-yellow-600 dark:bg-yellow-900/40 dark:text-yellow-200 dark:border-yellow-700',
+  Familiar:
+    'bg-brand-cream text-black border border-gray-300 dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500',
 }
 
 const skillGroups = [
@@ -51,6 +53,11 @@ const skillGroups = [
   },
 ]
 
+/**
+ * Section displaying skills grouped by category (Languages, Web & Frameworks,
+ * Tools). Each skill card shows an icon, name, years of experience, and a
+ * color-coded proficiency badge. Cards animate in on scroll and tilt on hover.
+ */
 function Skills() {
   const [ref, inView] = useInView()
 
@@ -77,7 +84,9 @@ function Skills() {
                       {skill.years} {skill.years === 1 ? 'year' : 'years'}
                     </p>
                   </div>
-                  <span className={`shrink-0 text-sm font-semibold px-3 py-1 rounded-full ${proficiencyStyles[skill.proficiency]}`}>
+                  <span
+                    className={`shrink-0 text-sm font-semibold px-3 py-1 rounded-full ${proficiencyStyles[skill.proficiency]}`}
+                  >
                     {skill.proficiency}
                   </span>
                 </TiltCard>

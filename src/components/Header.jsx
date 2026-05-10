@@ -2,8 +2,14 @@ import { useState, useEffect } from 'react'
 import { FaBars, FaTimes, FaMoon, FaSun } from 'react-icons/fa'
 import { useTheme } from '../context/ThemeContext'
 
+// Must match scroll-padding-top in index.css so programmatic scrolls
+// land at the same position as native anchor scrolls.
 const HEADER_OFFSET = 30
 
+/**
+ * Fixed navigation bar with active section highlighting and a dark mode toggle.
+ * Renders a full link row on desktop and a collapsible hamburger menu on mobile.
+ */
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('intro')
@@ -11,8 +17,16 @@ function Header() {
 
   const close = () => setMenuOpen(false)
 
+  // Highlight the nav link whose section occupies the upper 40% of the viewport.
+  // Scroll-based (vs. IntersectionObserver-at-mount) so it works with lazy-loaded
+  // sections that aren't in the DOM when the Header first mounts.
   useEffect(() => {
     const sectionIds = ['intro', 'experience', 'projects', 'skills', 'contact']
+
+    /**
+     * Reads scroll position and sets activeSection to the last section whose
+     * top edge is within the upper 40% of the viewport.
+     */
     const handleScroll = () => {
       const threshold = window.scrollY + window.innerHeight * 0.4
       let current = 'intro'
@@ -22,16 +36,31 @@ function Header() {
       }
       setActiveSection(current)
     }
+
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  /**
+   * Returns Tailwind classes for a nav link, adding the active highlight color
+   * when the link's section is currently in view.
+   * @param {string} id - The section id this link points to.
+   * @returns {string} Space-separated Tailwind class string.
+   */
   const navClass = (id) =>
     `hover:underline transition-colors duration-200 ${
       activeSection === id ? 'text-brand-orange' : ''
     }`
 
+  /**
+   * Returns a click handler that closes the mobile menu and smoothly scrolls to
+   * the given section. Uses a double rAF to wait for React to flush the
+   * menu-close re-render before computing the scroll target — without this the
+   * open dropdown's height skews getBoundingClientRect and the page lands too high.
+   * @param {string} id - The target section's id attribute.
+   * @returns {Function} Click event handler.
+   */
   const navigateTo = (id) => (e) => {
     e.preventDefault()
     close()
@@ -74,7 +103,7 @@ function Header() {
           </a>
         </div>
 
-        {/* Hamburger + toggle */}
+        {/* Hamburger + dark mode toggle */}
         <div className="md:hidden flex items-center gap-3">
           <button
             onClick={toggle}
@@ -83,14 +112,8 @@ function Header() {
           >
             {dark ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
           </button>
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            {menuOpen
-              ? <FaTimes className="w-6 h-6" />
-              : <FaBars className="w-6 h-6" />
-            }
+          <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+            {menuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
           </button>
         </div>
       </nav>
