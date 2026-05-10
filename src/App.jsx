@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { ThemeProvider } from './context/ThemeContext'
 import Header from './components/Header'
 import Intro from './components/Intro'
+import BugReport from './components/BugReport'
 
 // Below-fold sections are code-split so their JS is only downloaded when needed.
 const Experience = lazy(() => import('./components/Experience'))
@@ -19,6 +20,7 @@ function App() {
     <ThemeProvider>
       <div className="dark:text-gray-100">
         <Header />
+        <BugReport />
         {/* Intro is eagerly loaded and must live outside Suspense — if it were
             inside, React would hide it while any lazy sibling is still loading. */}
         <Intro />
