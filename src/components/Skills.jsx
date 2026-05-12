@@ -19,11 +19,11 @@ const skillGroups = [
   {
     category: 'Languages',
     skills: [
-      { name: 'Python', icon: <FaPython className="text-yellow-500 w-10 h-10" />, years: 4, proficiency: 'Expert' },
+      { name: 'Python', icon: <FaPython className="text-yellow-500 w-10 h-10" />, years: 4, proficiency: 'Proficient' },
       { name: 'C++', icon: <TbBrandCpp className="text-yellow-500 w-10 h-10" />, years: 3, proficiency: 'Advanced' },
       { name: 'Java', icon: <FaJava className="text-red-500 w-10 h-10" />, years: 2, proficiency: 'Proficient' },
       { name: 'C', icon: <SiC className="text-yellow-500 w-10 h-10" />, years: 2, proficiency: 'Proficient' },
-      { name: 'Ada', icon: <TbCode className="text-blue-400 w-10 h-10" />, years: 2, proficiency: 'Proficient' },
+      { name: 'Ada', icon: <TbCode className="text-blue-400 w-10 h-10" />, years: 2, proficiency: 'Familiar' },
       { name: 'SQL', icon: <BsDatabase className="text-orange-400 w-10 h-10" />, years: 2, proficiency: 'Proficient' },
       { name: 'R', icon: <SiR className="text-blue-600 w-10 h-10" />, years: 1, proficiency: 'Familiar' },
       { name: 'VBA', icon: <TbFileSpreadsheet className="text-green-600 w-10 h-10" />, years: 1, proficiency: 'Familiar' },
@@ -42,7 +42,7 @@ const skillGroups = [
   {
     category: 'Tools',
     skills: [
-      { name: 'GitLab', icon: <FaGitlab className="text-orange-500 w-10 h-10" />, years: 3, proficiency: 'Advanced' },
+      { name: 'GitLab', icon: <FaGitlab className="text-orange-500 w-10 h-10" />, years: 3, proficiency: 'Proficient' },
       { name: 'SonarQube', icon: <SiSonarqube className="text-blue-500 w-10 h-10" />, years: 2, proficiency: 'Proficient' },
       { name: 'Cameo/MagicDraw', icon: <TbHierarchy className="text-purple-500 w-10 h-10" />, years: 2, proficiency: 'Proficient' },
       { name: 'Green Hills MULTI', icon: <LiaMountainSolid className="text-green-500 w-10 h-10" />, years: 2, proficiency: 'Proficient' },

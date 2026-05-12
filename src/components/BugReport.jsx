@@ -7,24 +7,23 @@ import {
   FaExclamationCircle,
 } from 'react-icons/fa'
 
-const GITHUB_API_URL =
-  'https://api.github.com/repos/jtrailor/Portfolio_2/issues'
+const GITHUB_NEW_ISSUE_URL =
+  'https://github.com/jtrailor/Portfolio_2/issues/new'
 
 const inputClass =
   'w-full p-3 rounded-lg border border-gray-300 bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-dark_blue dark:focus:ring-gray-400 focus:border-transparent transition-all duration-200'
 
 /**
- * Floating bug report button and modal. Submits directly to the GitHub Issues
- * API using a fine-grained PAT stored in REACT_APP_GITHUB_TOKEN. The token is
- * scoped to "Issues: Read and Write" on this repo only, limiting exposure on
- * the client side.
+ * Floating bug report button and modal. Builds a pre-filled GitHub new-issue
+ * URL from the form fields and opens it in a new tab. No token required —
+ * GitHub handles authentication on their end.
  */
 function BugReport() {
   const [isOpen, setIsOpen] = useState(false)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [steps, setSteps] = useState('')
-  const [status, setStatus] = useState(null) // null | 'submitting' | { url, number } | 'error'
+  const [status, setStatus] = useState(null) // null | 'success' | 'error'
 
   /**
    * Resets all form fields and status, then closes the modal.
@@ -38,14 +37,14 @@ function BugReport() {
   }
 
   /**
-   * POSTs a new issue to the GitHub API with a markdown body built from the
-   * form fields plus auto-collected environment details. Transitions to the
-   * success or error panel depending on the outcome.
+   * Builds a markdown issue body from the form fields plus auto-collected
+   * environment details, constructs the pre-filled GitHub new-issue URL, and
+   * opens it in a new tab. Falls back to the error panel if window.open is
+   * blocked by the browser.
    * @param {React.FormEvent} e
    */
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    setStatus('submitting')
 
     const bodyLines = [
       '## Description',
@@ -57,35 +56,22 @@ function BugReport() {
       `- User Agent: ${navigator.userAgent}`,
     ]
 
-    try {
-      const res = await fetch(GITHUB_API_URL, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
-          Accept: 'application/vnd.github+json',
-          'Content-Type': 'application/json',
-          'X-GitHub-Api-Version': '2022-11-28',
-        },
-        body: JSON.stringify({
-          title,
-          body: bodyLines.join('\n'),
-          labels: ['bug'],
-        }),
-      })
+    const params = new URLSearchParams({
+      title,
+      body: bodyLines.join('\n'),
+      labels: 'bug',
+    })
 
-      if (!res.ok) throw new Error(`GitHub API returned ${res.status}`)
+    const opened = window.open(
+      `${GITHUB_NEW_ISSUE_URL}?${params}`,
+      '_blank',
+      'noopener,noreferrer',
+    )
 
-      const issue = await res.json()
-      setStatus({ url: issue.html_url, number: issue.number })
-    } catch (err) {
-      console.error('Bug report failed:', err)
-      setStatus('error')
-    }
+    setStatus(opened ? 'success' : 'error')
   }
 
-  const isSuccess = status?.url
-  const isError = status === 'error'
-  const showForm = !isSuccess && !isError
+  const showForm = !status
 
   return (
     <>
@@ -121,23 +107,15 @@ function BugReport() {
             </div>
 
             {/* Success panel */}
-            {isSuccess && (
+            {status === 'success' && (
               <div className="flex flex-col items-center gap-4 py-6 text-center">
                 <FaCheckCircle className="w-12 h-12 text-green-500 dark:text-green-400" />
                 <div>
-                  <p className="text-lg font-semibold">Issue filed — thanks!</p>
+                  <p className="text-lg font-semibold">GitHub opened in a new tab</p>
                   <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    #{status.number} has been added to the backlog.
+                    Your report is pre-filled — just click <strong>Submit new issue</strong> to file it.
                   </p>
                 </div>
-                <a
-                  href={status.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-brand-dark_blue dark:text-brand-light_blue hover:text-brand-orange transition-colors font-medium text-sm"
-                >
-                  View on GitHub <FaExternalLinkAlt className="w-3 h-3" />
-                </a>
                 <button
                   onClick={close}
                   className="mt-2 bg-brand-dark_blue text-white px-6 py-2 rounded-lg font-semibold hover:bg-brand-orange transition-colors duration-300"
@@ -148,20 +126,20 @@ function BugReport() {
             )}
 
             {/* Error panel */}
-            {isError && (
+            {status === 'error' && (
               <div className="flex flex-col items-center gap-4 py-6 text-center">
                 <FaExclamationCircle className="w-12 h-12 text-brand-orange" />
                 <div>
-                  <p className="text-lg font-semibold">Submission failed</p>
+                  <p className="text-lg font-semibold">Popup was blocked</p>
                   <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    Something went wrong on our end. You can try again or{' '}
+                    Allow popups for this site, or{' '}
                     <a
-                      href="https://github.com/jtrailor/Portfolio_2/issues/new"
+                      href={GITHUB_NEW_ISSUE_URL}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="underline hover:text-brand-orange transition-colors"
                     >
-                      open an issue directly on GitHub
+                      open GitHub directly <FaExternalLinkAlt className="inline w-3 h-3" />
                     </a>
                     .
                   </p>
@@ -179,8 +157,8 @@ function BugReport() {
             {showForm && (
               <>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                  Found something broken? Describe it below and it will be filed
-                  directly as a GitHub issue.
+                  Found something broken? Fill in the details below — it will
+                  open a pre-filled GitHub issue for you to review and submit.
                 </p>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                   <input
@@ -208,10 +186,9 @@ function BugReport() {
                   />
                   <button
                     type="submit"
-                    disabled={status === 'submitting'}
-                    className="bg-brand-dark_blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-orange transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="bg-brand-dark_blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-orange transition-colors duration-300"
                   >
-                    {status === 'submitting' ? 'Filing issue…' : 'Submit Bug Report'}
+                    Open GitHub Issue
                   </button>
                 </form>
               </>
